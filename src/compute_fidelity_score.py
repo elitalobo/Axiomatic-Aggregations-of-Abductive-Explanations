@@ -57,14 +57,6 @@ def compute(xgb,point,options,idx,fname,dirname,true_y):
         options.explain = point_
 
 
-    # if options.uselime or options.useanchor or options.useshap:
-    #     xgb = XGBooster(options, from_model=options.files[0],categorical_features=categorical_feature_names)
-    #     xgb.encode(test_on=point_)
-    # else:
-    #     xgb = XGBooster(options, from_encoding=options.files[0],categorical_features=categorical_feature_names)
-
-
-
     if options.encode:
         # if not xgb:
 
@@ -184,13 +176,6 @@ if __name__ == '__main__':
             ytest_pred = xgb.model.predict(X_test).flatten()
             print("train accuracy",np.mean(ytrain_pred==ytrain))
             print("test accuracy ",np.mean(ytest_pred==ytest))
-
-
-
-
-
-
-
 
             options.limefeats = xgb.X_test.shape[0]
 

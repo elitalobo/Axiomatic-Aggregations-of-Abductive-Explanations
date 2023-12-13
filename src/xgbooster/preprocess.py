@@ -23,7 +23,6 @@ import pickle
 #
 #==============================================================================
 def preprocess_dataset(raw_data_path, files):
-    print("preprocess dataset from ", raw_data_path)
     files = files.split(",")
 
     data_file = files[0]
@@ -56,11 +55,8 @@ def preprocess_dataset(raw_data_path, files):
     ##############################
     extra_info = {}
     categorical_names = {}
-    print(categorical_features)
     dataset_new = dataset_all.values.copy()
     for feature in categorical_features:
-        print("feature", feature)
-        print(dataset[:, feature])
         le = sklearn.preprocessing.LabelEncoder()
         le.fit(dataset[:, feature])
         categorical_names[feature] = le.classes_
@@ -109,7 +105,6 @@ def preprocess_dataset(raw_data_path, files):
     df = pd.DataFrame(data=dataset_new)
     df.columns = list(feature_names)
     df.to_csv(new_file_train, mode = 'w', index=False)
-    print("new dataset", new_file_train)
 
 
     f =  open(raw_data_path + dataset_name + '_data.csv.pkl', "wb")

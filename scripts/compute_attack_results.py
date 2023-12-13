@@ -12,7 +12,7 @@ LIME = "lime"
 SHAP = "shap"
 
 if __name__=='__main__':
-    expl_dir = "alldata/"
+    expl_dir = "data/"
     results={}
     for dir in os.listdir(expl_dir):
         words=dir.split("_")
@@ -60,11 +60,11 @@ if __name__=='__main__':
                 continue
 
 
-for key, value in results.items():
-    print("*****Dataset: " + key + "*********")
-    for subkey , subvalue in value.items():
-        print("Results for ",subkey)
-        print(subvalue)
+# for key, value in results.items():
+#     print("*****Dataset: " + key + "*********")
+#     for subkey , subvalue in value.items():
+#         print("Results for ",subkey)
+#         print(subvalue)
 
 
 compas_imp_f = ['race','unrelated_column_one','unrelated_column_two']

@@ -74,32 +74,7 @@ def lime_call(xgb, sample = None, nb_samples = 5, feats='all',
         assert (np.all(np.sum(class_probs, axis=1) == 1))
         return class_probs
 
-
-        # feat_sample_exp = xgb.transform(x)
-        #
-        # not_ood = xgb.model.predict(feat_sample_exp)
-        # # print("not ood", not_ood[:5])
-        #
-        # biased = (x[:, race_indc] < 0).astype('int')
-        # unbiased = (x[:, unrelated_indcs] < 0).astype('int')
-        # one_hot_biased = one_hot_encode(biased)
-        # one_hot_unbiased = one_hot_encode(unbiased)
-        # sol = np.where(np.array([not_ood == 1, not_ood == 1]).transpose(), one_hot_biased,
-        #                one_hot_unbiased)
-        #
-        # new_class_ids = np.argmax(sol,axis=1)
-        # # print("class_id", class_id.flatten()[:5])
-        # # print("new class id ", new_class_ids.flatten()[:5])
-        # if np.all(class_id.flatten() == new_class_ids.flatten())==False:
-        #     idx = np.where(class_id.flatten()!=new_class_ids.flatten())
-        #     # print(x[idx,:])
-        #     # print(not_ood[idx])
-        # assert(np.all(class_id.flatten() == new_class_ids.flatten()))
-        # return sol
-
-
     if attack:
-        # predict_fn_xgb = attack_predict_fn
 
         explainer = lime.lime_tabular.LimeTabularExplainer(xgb.X_train, sample_around_instance=True,feature_names=xgb.feature_names,
                                                                categorical_features=xgb.cat_feature_indices,
