@@ -1,13 +1,12 @@
 # aggrxp
 Axiomatic Aggregations of Abductive Explanations (AXp's)
 
-
-
 All datasets are available in *datasets/* folder.
 Folders named *\*_ood* contain datasets for Lime attack.
 Folders named *\*_shapood* contain datasets for SHAP attack.
 
 To install all requirements of this code, run
+
 ```commandline
 pip install -r requirements.txt
 ```
@@ -15,9 +14,11 @@ pip install -r requirements.txt
 Download datasets and results from [data folder](https://drive.google.com/drive/folders/1EZBDXD58jnDHHHOd1I_sBZi4VQrgeKqr?usp=drive_link) and add them to the root folder.
 
 Before generating abductive explanations, an XGBoost model must be trained for the OOD classifier. To train an XGBoost model with T n_estimators, run
+
 ```commandline
 python src/xreason.py -t -n T  datasets/traindataset/traindataset.csv
 ```
+
 This will generate a *temp/someotherpath/\*_mod.pkl* file.
 
 As an example, you can run the following command to train an XGBoost model with T=100 on *compas_ood* dataset.
@@ -29,7 +30,6 @@ python src/xreason.py -t -n 100 datasets/compas_ood/compas_ood.csv
 Next, we need to create a file *datasets/dataset_name/config_num.yml* such that it contains information about the biased and unbiased features.
 For an example, please check *datasets/compas_ood/config_num.yml*
 
-
 To compute M abductive explanations for the predictions of the attack model with OOD classifier *temp/someotherpath/\*_mod.pkl* on a test dataset *datasets/dataset_name/testdataset.csv*, execute the following command.
 
 ```commandline
@@ -37,6 +37,7 @@ python src/xreason.py -v -e smt -s z3 --xnum M -a datasets/dataset_name/config_n
 ```
 
 For example, you can generate abductive explanations for the *compas_ood_small_test.csv* dataset by running the following command.
+
 ```commandline
 python src/xreason.py -v -e smt -s z3 --xnum 100 -a datasets/compas_ood/config_num.yml temp/compas_ood/compas_ood_nbestim_100_maxdepth_3_testsplit_0.2.mod.pkl datasets/compas_ood/compas_ood_small_test.csv
 ```
@@ -46,7 +47,6 @@ To generate feature importance weights using our methods - Responsibility index,
 
 ```commandline
 python scripts/compute_explanations_single.py data/somepath1/mwc_expls.pkl "dataset_name"
-
 ```
 
 For example, for the compas_ood dataset, the path to explanations file is "data/compas_ood_nbestim_100_maxdepth_3_testsplit_0.2.mod_nbestim_100_maxdepth_3_testsplit_0.2/mwc_expls.pkl" 
@@ -59,6 +59,7 @@ python scripts/compute_explanations_single.py data/compas_ood_nbestim_100_maxdep
 All the explanation files generated in our experiments can be found in *data/* folder.
 
 To replicate our results in the paper, run
+
 ```commandline
 python compute_attack_results.py
 ```
